@@ -17,6 +17,7 @@ from devicehub import Sensor, Actuator, Device, Project
 import threading
 from time import sleep
 
+
 PROJECT_ID      = 'paste_your_PROJECT_ID_here'
 DEVICE_UUID     = 'paste_your_DEVICE_UUID_here'
 API_KEY         = 'paste_your_API_KEY_here'

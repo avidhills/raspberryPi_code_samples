@@ -6,7 +6,7 @@ switch 2 relays, and sending analog and digital sensors.
 In this example 2 relays are attached to GPIO 24 and GPIO 25 on Raspberry Pi,
 and the 2 sensors are simulated.
 
-First install Python API wrapper for devicehub 
+First install Python API wrapper for devicehub.net
 https://github.com/devicehubnet/devicehub_py
 
 created 26 May 2015
@@ -16,6 +16,8 @@ by Alexandru Gheorghe
 
 from devicehub import Sensor, Actuator, Device, Project
 import threading
+import RPi.GPIO as GPIO
+import json
 from time import sleep
 
 PROJECT_ID     = 'paste_your_PROJECT_ID_here'
@@ -32,7 +34,7 @@ InputAnalog = 42
 
 # init pins
 GPIO_PIN1 = 24
-GPIO_PIN1 = 25
+GPIO_PIN2 = 25
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN1, GPIO.OUT)
@@ -91,10 +93,10 @@ def gpio_input(gpio_input, device, sensor):
     return
 
 project = Project(PROJECT_ID)
-device = Device(project, DEVICE_UUID, API_KEY)
+device  = Device(project, DEVICE_UUID, API_KEY)
 
-DI1 = Sensor(Sensor.DIGITAL, DI_SENSOR_NAME)
-AN1 = Sensor(Sensor.ANALOG, AN_SENSOR_NAME)
+DI1  = Sensor(Sensor.DIGITAL, DI_SENSOR_NAME)
+AN1  = Sensor(Sensor.ANALOG, AN_SENSOR_NAME)
 ACT1 = Actuator(Actuator.DIGITAL, ACTUATOR_NAME1)
 ACT2 = Actuator(Actuator.DIGITAL, ACTUATOR_NAME2)
 

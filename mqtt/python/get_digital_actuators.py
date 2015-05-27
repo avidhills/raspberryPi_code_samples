@@ -18,6 +18,7 @@ from devicehub import Sensor, Actuator, Device, Project
 import threading
 from time import sleep
 import RPi.GPIO as GPIO
+import json
 
 PROJECT_ID     = 'paste_your_PROJECT_ID_here'
 DEVICE_UUID    = 'paste_your_DEVICE_UUID_here'
@@ -28,7 +29,7 @@ ACTUATOR_NAME2 = 'paste_your_second_ACTUATOR_NAME_here'
 
 # init pins
 GPIO_PIN1 = 24
-GPIO_PIN1 = 25
+GPIO_PIN2 = 25
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN1, GPIO.OUT)
