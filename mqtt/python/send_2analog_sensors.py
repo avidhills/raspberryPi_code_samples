@@ -45,8 +45,8 @@ def gpio_input(id, device, sensor):
 project = Project(PROJECT_ID)
 device = Device(project, DEVICE_UUID, API_KEY)
 
-AN1 = Sensor(Sensor.DIGITAL, AN_SENSOR_NAME1)
-AN2 = Sensor(Sensor.DIGITAL, AN_SENSOR_NAME2)
+AN1 = Sensor(Sensor.ANALOG, AN_SENSOR_NAME1)
+AN2 = Sensor(Sensor.ANALOG, AN_SENSOR_NAME2)
 
 device.addSensor(AN1)
 device.addSensor(AN2)
