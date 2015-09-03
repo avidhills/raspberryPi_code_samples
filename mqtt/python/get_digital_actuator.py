@@ -7,7 +7,7 @@ In this example a relay is attached to GPIO 24 on Raspberry Pi.
 First install Python API wrapper for devicehub 
 https://github.com/devicehubnet/devicehub_py
 
-created 26 May 2015
+created 02 September 2015
 by Alexandru Gheorghe
 
 """
@@ -40,18 +40,12 @@ def switchRelay(state):
     print "PIN ", GPIO_PIN, " state: ", state
 
     
-def act1(client, userdata, message):
+def act1(payload):
     """
-    :param client:
-    :param userdata:
-    :param message:
+    :param payload: mqtt payload message
     """
-    # handles message arrived on subscribed topic
-    msg = str(message.payload)
-    j = json.loads(msg)
-    act_state = j['state']
-    print "act1", j['state']
-    switchRelay(act_state)
+
+    switchRelay(ACT1.state)
 
 project = Project(PROJECT_ID)
 device = Device(project, DEVICE_UUID, API_KEY)

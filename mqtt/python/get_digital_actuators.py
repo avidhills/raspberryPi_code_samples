@@ -7,7 +7,7 @@ In this example 2 relays are attached to GPIO 24 and GPIO 25 on Raspberry Pi.
 First install Python API wrapper for devicehub 
 https://github.com/devicehubnet/devicehub_py
 
-created 26 May 2015
+created 02 September 2015
 by Alexandru Gheorghe
 
 """
@@ -15,10 +15,7 @@ by Alexandru Gheorghe
 
 
 from devicehub import Sensor, Actuator, Device, Project
-import threading
-from time import sleep
 import RPi.GPIO as GPIO
-import json
 
 PROJECT_ID     = 'paste_your_PROJECT_ID_here'
 DEVICE_UUID    = 'paste_your_DEVICE_UUID_here'
@@ -52,33 +49,19 @@ def switchRelay(ID, state):
     print "PIN ", GPIO_PIN1, " state: ", state
     print "PIN ", GPIO_PIN2, " state: ", state
     
-def act1(client, userdata, message):
+def act1_callback(payload):
     """
-    :param client:
-    :param userdata:
-    :param message:
+    :param payload: mqtt payload message
     """
 
-    # handles message arrived on subscribed topic
-    msg = str(message.payload)
-    j = json.loads(msg)
-    act_state = j['state']
-    print "act1", j['state']
-    switchRelay('1', act_state)
+    switchRelay('1', ACT1.state)
 
-def act2(client, userdata, message):
+def act2_callback(payload):
     """
-    :param client:
-    :param userdata:
-    :param message:
+    :param payload: mqtt payload message
     """
 
-    # handles message arrived on subscribed topic
-    msg = str(message.payload)
-    j = json.loads(msg)
-    act_state = j['state']
-    print "act2", j['state']
-    switchRelay('2', act_state)
+    switchRelay('2', ACT2.state)
 
 
 project = Project(PROJECT_ID)
@@ -87,8 +70,8 @@ device = Device(project, DEVICE_UUID, API_KEY)
 ACT1 = Actuator(Actuator.DIGITAL, ACTUATOR_NAME1)
 ACT2 = Actuator(Actuator.DIGITAL, ACTUATOR_NAME2)
 
-device.addActuator(ACT1, act1)
-device.addActuator(ACT2, act2)
+device.addActuator(ACT1, act1_callback)
+device.addActuator(ACT2, act2_callback)
 
 try:
     while True:

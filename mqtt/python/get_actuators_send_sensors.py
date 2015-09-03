@@ -9,7 +9,7 @@ and the 2 sensors are simulated.
 First install Python API wrapper for devicehub.net
 https://github.com/devicehubnet/devicehub_py
 
-created 26 May 2015
+updated 02 September 2015
 by Alexandru Gheorghe
 
 """
@@ -17,7 +17,6 @@ by Alexandru Gheorghe
 from devicehub import Sensor, Actuator, Device, Project
 import threading
 import RPi.GPIO as GPIO
-import json
 from time import sleep
 
 PROJECT_ID     = 'paste_your_PROJECT_ID_here'
@@ -57,33 +56,19 @@ def switchRelay(ID, state):
     print "PIN ", GPIO_PIN1, " state: ", state
     print "PIN ", GPIO_PIN2, " state: ", state
     
-def act1(client, userdata, message):
+def act1_callback(payload):
     """
-    :param client:
-    :param userdata:
-    :param message:
+    :param payload: mqtt payload message
     """
 
-    # handles message arrived on subscribed topic
-    msg = str(message.payload)
-    j = json.loads(msg)
-    act_state = j['state']
-    print "act1", j['state']
-    switchRelay('1', act_state)
+    switchRelay('1', ACT1.state)
 
 def act2(client, userdata, message):
     """
-    :param client:
-    :param userdata:
-    :param message:
+    :param payload: mqtt payload message
     """
 
-    # handles message arrived on subscribed topic
-    msg = str(message.payload)
-    j = json.loads(msg)
-    act_state = j['state']
-    print "act2", j['state']
-    switchRelay('2', act_state)
+    switchRelay('2', ACT2.state)
 
 def gpio_input(gpio_input, device, sensor):
  
@@ -103,7 +88,7 @@ ACT2 = Actuator(Actuator.DIGITAL, ACTUATOR_NAME2)
 device.addSensor(DI1)
 device.addSensor(AN1)
 
-device.addActuator(ACT1, act1)
+device.addActuator(ACT1, act1_callback)
 device.addActuator(ACT2, act2)
 
 threads = []
