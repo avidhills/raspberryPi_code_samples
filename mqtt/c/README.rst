@@ -1,4 +1,4 @@
-To use any of the samples you have to install the Devicehub.net C library:
+To use any of the samples you have to install the Devicehub.net C library::
 
     $ sudo apt-get install libssl-dev
     $ git clone http://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.c.git
