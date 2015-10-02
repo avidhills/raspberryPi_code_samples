@@ -1,31 +1,30 @@
 To use any of the samples you have to install the Devicehub.net C library:
 
+    $ sudo apt-get install libssl-dev
 
-    	$ sudo apt-get install libssl-dev
+    $ git clone http://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.c.git
 
-    	$ git clone http://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.c.git
+    $ cd org.eclipse.paho.mqtt.c.git
 
-    	$ cd org.eclipse.paho.mqtt.c.git
+    $ make
 
-    	$ make
+    $ sudo make install
 
-    	$ sudo make install
+    $ sudo apt-get install cmake
 
-    	$ sudo apt-get install cmake
+    $ git clone https://github.com/devicehubnet/devicehub_c.git
 
-    	$ git clone https://github.com/devicehubnet/devicehub_c.git
+    $ cd devicehub_c.git
 
-    	$ cd devicehub_c.git
+    $ mkdir build
 
-    	$ mkdir build
+    $ cd build
 
-    	$ cd build
+    $ cmake..
 
-    	$ cmake..
+    $ make
 
-    	$ make
-
-    	$ sudo make install
+    $ sudo make install
 
 To run the included sample (be sure to be in the build folder)::
 
