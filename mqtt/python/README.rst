@@ -4,7 +4,7 @@ Install from pypi (recommended)::
 
     $ pip install devicehub
 
-To install from github::
+Alternative install from github::
 
     $ pip install git+git://github.com/devicehubnet/devicehub_py.git
 
